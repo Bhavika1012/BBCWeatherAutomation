@@ -1,4 +1,4 @@
-package com.luma.runner;
+package couk.weather.bbc.cucumber.runner;
 
 import com.cucumber.listener.Reporter;
 import cucumber.api.CucumberOptions;
@@ -8,18 +8,19 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/java/resources/featurefile",
-        glue = "com/luma",
-        tags = "@smoke",
+        features = "src/test/java/resources/featurefiles",
+        //Source root = glue
+        glue = "couk/weather/bbc/cucumber/steps", //folder containing step definitions
+        tags = "@test",
         plugin = {"pretty", "html:target/cucumber-report/cucumber.html",
         "com.cucumber.listener.ExtentCucumberFormatter:target/Extent_Reports/report.html",
         "json:target/RunCuke/cucumber.json"}
 )
-public class SmokeTestRunner {
+public class MainTestRunner {
     @AfterClass
     public static void setUp() {
         String projectPath = System.getProperty("user.dir");
-        String reportConfigPath = projectPath + "/src/test/java/resources/extentreport/extent-config.xml";
+        String reportConfigPath = projectPath + "/src/test/java/resources/extentsreport/extent-config.xml";
         Reporter.loadXMLConfig(reportConfigPath);
         Reporter.setSystemInfo("User Name", System.getProperty("user.name"));
         Reporter.setSystemInfo("Time Zone", System.getProperty("user.timezone"));
